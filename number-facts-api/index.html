@@ -19,11 +19,15 @@
             <div class="col-md-6 mx-auto p-4">
                 <div class="card bg-primary text-white mt-5 p-4">
                     <h1>Number Facts</h1>
-                    <p>Enter a number and get a random fact about that number.</p>
+                    <p>Enter a number/year and get a random fact about it.</p>
+                    <select class="form-select mb-2" id="selectOptions">
+                        <option class="" value="year" id="yearOption"> Year </option>
+                        <option class="" value="number" id="numberOption"> Number </option>
+                     </select>
                     <input type="number" class="form-control form-control-lg " id="numberInput" placeholder="Enter any number...">
                     <div id="fact" class="card-body">
                         <h4 class="card-title">
-                            Number Fact : 
+                            Random Fact: 
                         </h4>
                         <p id="factText" class="card-text"></p>
                     </div>
@@ -35,26 +39,78 @@
     <script>
         let fact = document.querySelector('#fact');
         let factText = document.querySelector('#factText');
-
+        let selectOptions = document.getElementById('selectOptions');
         let numberInput = document.querySelector('#numberInput');
-        numberInput.addEventListener('input', getFactAjax);
-        function getFactAjax(){
-            let number = numberInput.value;
+        numberInput.addEventListener('input', getFacts);
+        
+        // // Functionality with AJAX
+        // function getFactAjax(){
+        //     let number = numberInput.value;
             
-            let xhr = new XMLHttpRequest();
-            xhr.open('GET', 'http://numbersapi.com/'+number);
+        //     let xhr = new XMLHttpRequest();
+        //     xhr.open('GET', 'http://numbersapi.com/'+number);
 
-            xhr.onload = function(){
-                if(this.status == 200 && number != ''){
+        //     xhr.onload = function(){
+        //         if(this.status == 200 && number != ''){
+        //             fact.style.display = 'block';
+        //             factText.innerText = this.responseText;
+        //         }
+        //         if(number == ''){
+        //             factText.innerText = '';
+        //         }
+        //     }
+
+        //     xhr.send();
+        // }
+            
+        selectOptions.addEventListener('change', getFacts);
+
+        function getFacts(){
+            if(selectOptions.value == 'number'){
+                getFactNumber();
+            } else if(selectOptions.value == 'year'){
+                getFactNumber();
+            }
+        }
+
+
+        // Fetch
+        function getFactNumber(){
+            let number = numberInput.value;
+            fetch('http://numbersapi.com/'+number)
+            .then(response => response.text())
+            .then(data => {
+                if(number != ''){
                     fact.style.display = 'block';
-                    factText.innerText = this.responseText;
+                    factText.innerText = data;
                 }
                 if(number == ''){
-                    factText.innerText = '';
+                    factText.innerText = '...';
                 }
-            }
+            })
+            .catch(error => {
+                console.log(error);
+            })
+        }
 
-            xhr.send();
+        function getFactYear(){
+            numberInput.innerText = 'Enter any year...';
+            let year = numberInput.value;
+            fetch('http://numbersapi.com/'+year+'/+year')
+            .then(response => response.text())
+            .then(data => {
+                console.log(data);
+                // if(year != ''){
+                //     fact.style.display = 'block';
+                //     factText.innerText = data;
+                // }
+                // if(year == ''){
+                //     factText.innerText = '...';
+                // }
+            })
+            .catch(error => {
+                console.log(error);
+            })
         }
 
     </script>
