@@ -69,7 +69,7 @@
             if(selectOptions.value == 'number'){
                 getFactNumber();
             } else if(selectOptions.value == 'year'){
-                getFactNumber();
+                getFactYear();
             }
         }
 
@@ -96,17 +96,16 @@
         function getFactYear(){
             numberInput.innerText = 'Enter any year...';
             let year = numberInput.value;
-            fetch('http://numbersapi.com/'+year+'/+year')
+            fetch('http://numbersapi.com/'+year+'/year')
             .then(response => response.text())
             .then(data => {
-                console.log(data);
-                // if(year != ''){
-                //     fact.style.display = 'block';
-                //     factText.innerText = data;
-                // }
-                // if(year == ''){
-                //     factText.innerText = '...';
-                // }
+                if(year != ''){
+                    fact.style.display = 'block';
+                    factText.innerText = data;
+                }
+                if(year == ''){
+                    factText.innerText = '...';
+                }
             })
             .catch(error => {
                 console.log(error);
