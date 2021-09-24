@@ -1,0 +1,11 @@
+
+MODULMODES
+Modules are common website components that are used like building blocks to create pages. Each module is a colletion of "generic" elements - images, text, buttons, etc. 
+Many modyles are combine to build a page. This breaks complex problems into smaller compnents that are easier to understand, communicate and build. 
+
+
+Dependencies are a cornerstone of modern web development. These are the required tools, plugins, libraries and frameworks necessary to build high-level web applications.
+
+What are prototype usability tests?
+
+
