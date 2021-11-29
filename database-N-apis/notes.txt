@@ -1,0 +1,12 @@
+POST with fetch
+- Routing
+- JSON Parsing
+- POST with fetch()
+
+
+
+SAVING TO A DATABASE
+LOCALSTORAGE, FIREBASE, MLAB, MONGODB, MYSQL, SQLLITE(Socratic), NeDB, 
+
+
+// Paused lesson for now. It's above me. 
